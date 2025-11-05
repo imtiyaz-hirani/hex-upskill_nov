@@ -1,6 +1,9 @@
 package com.main;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ProductService {
 
@@ -46,4 +49,36 @@ public class ProductService {
                 .distinct()
                 .toList();
     }
+
+    public List<Product> sortByPrice(List<Product> list, SortDirection sortDirection) {
+        switch(sortDirection.toString()){
+            case "ASC":
+                return list.stream()
+                        .sorted((p1,p2)->(int) (p1.getPrice() - p2.getPrice()))
+                        .toList();
+
+            case "DESC":
+                return list.stream()
+                        .sorted((p1,p2)->(int) (p2.getPrice() - p1.getPrice()))
+                        .toList();
+            default:
+                break;
+        }
+    return null;
+     }
+
+    public Map<String, Integer> groupByCategory(List<Product> list) {
+        Map<Category, List<Product>> map =
+        list.stream()
+                .collect(Collectors.groupingBy(Product::getCategory));
+
+        Map<String, Integer> mapResp = new HashMap<>();
+        map.entrySet().forEach(entry->{
+            mapResp.put(entry.getKey().toString(), entry.getValue().size());
+        });
+        return mapResp;
+    }
 }
+//10-15 = -5 -ve : [p1,p2]
+
+//20-10 = +Ve  [p2,p1]

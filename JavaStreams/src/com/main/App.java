@@ -1,6 +1,7 @@
 package com.main;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class App {
@@ -33,6 +34,21 @@ public class App {
                     System.out.println("List of Product Categories");
                     List<Category> catList = productService.getProductCategories(list);
                     catList.forEach(c-> System.out.println(c));
+                    break;
+                case 3:
+                    System.out.println("Sorting of Products by price ASC");
+                    List<Product> sortedListAsc =productService.sortByPrice(list, SortDirection.ASC);
+                    sortedListAsc.forEach(p-> System.out.println(p));
+                    System.out.println("Sorting of Products by price DESC");
+                    sortedListAsc =productService.sortByPrice(list, SortDirection.DESC);
+                    sortedListAsc.forEach(p-> System.out.println(p));
+                    break;
+                case 4:
+                    System.out.println("Grouping by Category and Counting");
+                    Map<String, Integer> map = productService.groupByCategory(list);
+                    map.entrySet().forEach(entry->{
+                        System.out.println(entry.getKey() + "-->" + entry.getValue());
+                    });
                     break;
                 default:
                     break;
