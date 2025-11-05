@@ -20,19 +20,19 @@ public class Ticket { //ticket
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long id; //findById
 
     @Column(nullable = false)
-    private String subject;
+    private String subject; //findBySubject
 
     @Column(length = 1000)
     private String issue;
 
     @Enumerated(EnumType.STRING)
-    private Status status;
+    private Status status; //findByStatus
 
     @Enumerated(EnumType.STRING)
-    private Priority priority;
+    private Priority priority; //findByPriority
 
     @CreationTimestamp
     private Instant createdAt;

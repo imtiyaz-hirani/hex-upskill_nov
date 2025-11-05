@@ -7,6 +7,8 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @AllArgsConstructor
 @RequestMapping("/api/ticket")
@@ -20,5 +22,17 @@ public class TicketController {
 
         return ticketService.add(customerId, ticketReqDto);
 
+    }
+
+    @GetMapping("/all")
+    public List<Ticket> getTickets(@RequestParam(name="size",required = false,defaultValue = "100000") Integer size ,
+                                   @RequestParam(name="page", required = false, defaultValue = "0") Integer page  ){
+       return ticketService.allTickets(page,size);
+    }
+
+    @GetMapping("/filter")
+    public List<Ticket> getTicketsFilter(@RequestParam(required = false, defaultValue = "") String priority ,
+                                 @RequestParam(required = false,defaultValue = "") String status){
+        return ticketService.getTicketsFilter(priority,status);
     }
 }
