@@ -8,22 +8,16 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
-@Table(name = "customers")
+@Table(name = "plan")
 @Getter
 @Setter
 @NoArgsConstructor
-public class Customer {
-
+public class Plan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private String cty;
+    private double price;
 
-//    @ManyToMany
-//    @JoinTable(name = "customer_plan")
-//    private List<Plan> plans; //p1 p2 p3
 
 }
-// int x = 6 7 8 9
-// List<Integer> list ={6,7,8,9}

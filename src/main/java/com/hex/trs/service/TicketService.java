@@ -64,7 +64,9 @@ public class TicketService {
             if(list.isEmpty()){
                 list = allTickets();
             }
-            List<Long> idList = list.stream().map(Ticket :: getId).toList();
+            List<Long> idList = list.stream()
+                                .map(t->t.getId())
+                                .toList();
 
             list = ticketRepository.findByStatus(statusVal,idList);
         }
