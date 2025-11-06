@@ -1,6 +1,7 @@
 package com.hex.trs.service;
 
 import com.hex.trs.dto.TicketReqDto;
+import com.hex.trs.dto.TicketResDto;
 import com.hex.trs.enums.Priority;
 import com.hex.trs.enums.Status;
 import com.hex.trs.mapper.TicketMapper;
@@ -72,5 +73,9 @@ public class TicketService {
         }
 
         return list;
+    }
+
+    public List<TicketResDto> getTicketInfo() {
+        return ticketRepository.getTicketInfo();
     }
 }
