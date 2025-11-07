@@ -20,6 +20,9 @@ public class Customer {
     private String name;
     private String cty;
 
+    @OneToOne
+    private User user;
+
 //    @ManyToMany
 //    @JoinTable(name = "customer_plan")
 //    private List<Plan> plans; //p1 p2 p3

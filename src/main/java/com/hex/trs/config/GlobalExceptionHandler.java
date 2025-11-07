@@ -1,6 +1,7 @@
 package com.hex.trs.config;
 
 import com.hex.trs.exception.InvalidIdException;
+import com.hex.trs.exception.UsernameAlreadyExist;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
@@ -35,6 +36,11 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(InvalidIdException.class)
     public ResponseEntity<?> handleInvalidIdException(InvalidIdException e){
+        return ResponseEntity.badRequest().body(e.getMessage());
+    }
+
+    @ExceptionHandler(UsernameAlreadyExist.class)
+    public ResponseEntity<?> handleUsernameAlreadyExist(UsernameAlreadyExist e){
         return ResponseEntity.badRequest().body(e.getMessage());
     }
 }
