@@ -5,13 +5,16 @@ import com.hex.trs.model.User;
 import com.hex.trs.repository.UserRepository;
 import lombok.AllArgsConstructor;
 
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
 @AllArgsConstructor
-public class UserService {
+public class UserService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
@@ -24,5 +27,12 @@ public class UserService {
 
     public User save(User user) {
         return userRepository.save(user);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user= userRepository.findByUsername(username)
+                .orElseThrow(()->new UsernameNotFoundException("Invalid User!!"));
+        return user;
     }
 }
